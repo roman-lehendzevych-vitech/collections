@@ -43,42 +43,33 @@ public class LinkedList<E> implements List<E> {
     @Override
     public boolean addAll(int index, List<E> collection) {
         checkAddIndex(index);
-
         int numNew = collection.size();
         if (numNew == 0) {
             return false;
         }
-
         if (numNew == 1) {
             add(collection.get(0), index);
             return true;
         }
-
-
         if (index == size) {
             addAll(collection);
             return true;
         }
-
         Node<E> node = head;
         Node<E> tmp;
         Node<E> newNode = null;
-
         if (index != 0) {
             if (index > 1) {
                 for (int i = 0; i < index - 1; i++) {
                     node = node.next;
                 }
             }
-
             tmp = node.next;
-
             for (int i = 0; i < collection.size(); i++) {
                 newNode = new Node<>(node, collection.get(i), null);
                 node.next = newNode;
                 node = node.next;
             }
-
             newNode.next = tmp;
             tmp.prev = newNode;
         } else {
@@ -93,11 +84,9 @@ public class LinkedList<E> implements List<E> {
                     firstNode = firstNode.next;
                 }
             }
-
             firstNode.next = node;
             node.prev = firstNode;
         }
-
         size += collection.size();
         return true;
     }
@@ -222,12 +211,10 @@ public class LinkedList<E> implements List<E> {
         }
         checkIndex(fromIndex);
         checkAddIndex(toIndex);
-
         Node<E> node = head;
         for (int i = 0; i < fromIndex; i++) {
             node = node.next;
         }
-
         List<E> newList = new LinkedList<>();
         for (int i = fromIndex; i < toIndex; i++) {
             newList.add(node.element);
